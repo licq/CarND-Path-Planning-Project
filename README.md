@@ -1,5 +1,16 @@
 # CarND-Path-Planning-Project
 Self-Driving Car Engineer Nanodegree Program
+
+## Reflection
+
+### Waypoints
+I followed the guidelines of the walkthrough. It uses the spline to create the smooth path. And it uses the left points from the last calculation and only generate the missing points. It uses the reference velocity to control the maximum acceleration and breaking.
+
+### Planner
+I use a very simple planner. If the car is too close to the front car, I check the other lanes to see if it is safe to change lane. If it is, change the lane, otherwise set the speed lower. I prefer the left lane than the right.
+I think it will be better if I use a cost function based method to do the plan work.
+
+
    
 ### Simulator.
 You can download the Term3 Simulator which contains the Path Planning Project from the [releases tab (https://github.com/udacity/self-driving-car-sim/releases).

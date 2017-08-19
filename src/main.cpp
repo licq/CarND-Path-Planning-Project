@@ -251,8 +251,7 @@ int main() {
               }
 
               if (too_close) {
-                if (ref_vel > check_speed)
-                  ref_vel -= 0.224;
+                bool changed_lane = false;
                 vector<int> lane_offsets = {-1, 1};
                 for (int i = 0; i < lane_offsets.size(); i++) {
                   bool is_safe = true;
@@ -270,7 +269,7 @@ int main() {
                       double check_car_s = sensor_fusion[j][5];
                       check_car_s += prev_size * 0.02 * check_speed;
 
-                      if (check_car_s > car_s && check_car_s - car_s < 15) {
+                      if (check_car_s > car_s && check_car_s - car_s < 25) {
                         is_safe = false;
                         break;
                       }
@@ -282,8 +281,12 @@ int main() {
                   }
                   if (is_safe) {
                     lane = target_lane;
+                    changed_lane = true;
                     break;
                   }
+                }
+                if(!changed_lane){
+                  ref_vel -= 0.224;
                 }
               } else if (ref_vel < 49.5) {
                 ref_vel += 0.224;
